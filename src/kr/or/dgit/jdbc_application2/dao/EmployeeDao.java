@@ -19,13 +19,12 @@ public class EmployeeDao implements SqlDao<Employee> {
 	}
 
 	private EmployeeDao() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void insertItem(Employee item) throws SQLException {
 		String sql = "INSERT INTO employee(empno, empname, title, manager, salary, dno) VALUES(?, ?, ?, ?, ?, ?)";
-		try (PreparedStatement pstmt = DBCon.getInstance().getConnection().prepareStatement(sql);){
+		try (PreparedStatement pstmt = DBCon.getInstance().getConnection().prepareStatement(sql);) {
 			pstmt.setInt(1, item.getEmpNo());
 			pstmt.setString(2, item.getEmpName());
 			pstmt.setInt(3, item.getTitle().getTitleNo());
@@ -39,7 +38,7 @@ public class EmployeeDao implements SqlDao<Employee> {
 	@Override
 	public void deleteItem(Employee item) throws SQLException {
 		String sql = "delete from employee where empno = ?";
-		try (PreparedStatement pstmt = DBCon.getInstance().getConnection().prepareStatement(sql);){
+		try (PreparedStatement pstmt = DBCon.getInstance().getConnection().prepareStatement(sql);) {
 			pstmt.setInt(1, item.getEmpNo());
 			pstmt.executeUpdate();
 		}
@@ -48,7 +47,7 @@ public class EmployeeDao implements SqlDao<Employee> {
 	@Override
 	public void updateItem(Employee item) throws SQLException {
 		String sql = "update employee set empname=?, title=?, manager=?, salary=?, dno=? where empno=?";
-		try (PreparedStatement pstmt = DBCon.getInstance().getConnection().prepareStatement(sql);){
+		try (PreparedStatement pstmt = DBCon.getInstance().getConnection().prepareStatement(sql);) {
 			pstmt.setString(1, item.getEmpName());
 			pstmt.setInt(2, item.getTitle().getTitleNo());
 			pstmt.setInt(3, item.getManager().getEmpNo());
@@ -83,8 +82,8 @@ public class EmployeeDao implements SqlDao<Employee> {
 		Employee manager = new Employee(rs.getInt("manager"));
 		int salary = rs.getInt("salary");
 		Department dno = new Department(rs.getInt("dno"));
-		return new Employee(empNo, empName, title, manager, salary, dno);
 		
+		return new Employee(empNo, empName, title, manager, salary, dno);
 	}
 
 	@Override
@@ -95,7 +94,6 @@ public class EmployeeDao implements SqlDao<Employee> {
 				ResultSet rs = pstmt.executeQuery();) {
 			while (rs.next()) {
 				lists.add(getEmployee(rs));
-				
 			}
 		}
 		return lists;

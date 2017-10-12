@@ -14,13 +14,12 @@ public class TextFieldComponent extends JPanel {
 		setLayout(new GridLayout(1, 0, 10, 0));
 
 		JLabel lblTitle = new JLabel(title);
-		lblTitle.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblTitle);
 
 		textField = new JTextField();
 		add(textField);
 		textField.setColumns(10);
-
 	}
 
 	public String getTextValue() {
@@ -34,12 +33,11 @@ public class TextFieldComponent extends JPanel {
 	public JTextField getTextField() {
 		return textField;
 	}
-	
-	public void isEmptyCheck() throws Exception{
-		if(getTextValue().equals("")){
+
+	public void isEmptyCheck() throws Exception {
+		if (getTextValue().equals("")) {
 			textField.requestFocus();
 			throw new Exception("공백 존재");
 		}
-		
 	}
 }

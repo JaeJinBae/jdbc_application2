@@ -5,7 +5,6 @@ public class Title {
 	private String titleName;
 
 	public Title() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Title(int titleNo) {
@@ -35,7 +34,7 @@ public class Title {
 
 	@Override
 	public String toString() {
-		return String.format("Title [titleNo=%s, titleName=%s]", titleNo, titleName);
+		return String.format("%s (%s)", titleName, titleNo);
 	}
 
 }

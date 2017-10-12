@@ -18,7 +18,6 @@ public class TitleDao implements SqlDao<Title> {
 	}
 
 	private TitleDao() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

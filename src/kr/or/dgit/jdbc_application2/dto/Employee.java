@@ -9,7 +9,6 @@ public class Employee {
 	private Department dno;
 
 	public Employee() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Employee(int empNo) {
@@ -75,8 +74,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s %s %s %s %s]", empNo, empName, title.getTitleNo(), manager.getEmpNo(), salary,
-				dno.getDeptNo());
+		return String.format("%s (%s)", empName, empNo);
 	}
 
 }

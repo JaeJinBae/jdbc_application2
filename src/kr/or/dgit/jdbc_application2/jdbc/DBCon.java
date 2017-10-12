@@ -10,24 +10,22 @@ import java.util.Properties;
 public class DBCon {
 	private static final DBCon instance = new DBCon();
 	private Connection connection;
-	
+
 	public static DBCon getInstance() {
 		return instance;
 	}
 
-	private DBCon(){
+	private DBCon() {
 		Properties properties = getProperties("conf.properties");
 		try {
-			connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"), properties.getProperty("pwd"));
+			connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"),
+					properties.getProperty("pwd"));
 		} catch (SQLException e) {
 			System.err.printf("%s - %s%n", e.getErrorCode(), e.getMessage());
 			e.printStackTrace();
 		}
-/*		System.out.println(properties.getProperty("user"));
-		System.out.println(properties.getProperty("pwd"));
-		System.out.println(properties.getProperty("url"));*/
 	}
-	
+
 	private Properties getProperties(String propertiesPath) {
 		Properties properties = new Properties();
 		InputStream is = ClassLoader.getSystemResourceAsStream(propertiesPath);
@@ -42,7 +40,5 @@ public class DBCon {
 	public Connection getConnection() {
 		return connection;
 	}
-
-	
 
 }

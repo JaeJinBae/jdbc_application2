@@ -1,4 +1,4 @@
-package kr.or.dgit.jdbc_application2.dto;
+package kr.or.dgit.jdbc_application_teacher.dto;
 
 public class Department {
 	private int deptNo;

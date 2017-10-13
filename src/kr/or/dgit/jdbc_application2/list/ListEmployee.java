@@ -2,6 +2,10 @@ package kr.or.dgit.jdbc_application2.list;
 
 import javax.swing.SwingConstants;
 
+import kr.or.dgit.jdbc_application2.dto.Department;
+import kr.or.dgit.jdbc_application2.dto.Employee;
+import kr.or.dgit.jdbc_application2.dto.Title;
+
 @SuppressWarnings("serial")
 public class ListEmployee extends AbstractList {
 
@@ -15,7 +19,7 @@ public class ListEmployee extends AbstractList {
 	@Override
 	protected Object[][] getData() {
 		Object[][] datas = {
-				{1, "이성래", "과장", "이사장", 5000000, "기획"},
+				{1, "이성래", new Title(3, "차장"), new Employee("사장"), 5000000, new Department("기획")},
 				
 				{2, "이성래", "과장", "이사장", 5000000, "기획"}, 
 				{3, "이성래", "과장", "이사장", 5000000, "기획"}
@@ -30,8 +34,14 @@ public class ListEmployee extends AbstractList {
 
 	@Override
 	public Object getSelectedItem() {
-		// TODO Auto-generated method stub
-		return null;
+		int seletedIndex = table.getSelectedRow();
+		int empNo=(int) table.getValueAt(seletedIndex, 0);
+		String empName=(String) table.getValueAt(seletedIndex, 1);
+		Title title= new Title((String) table.getValueAt(seletedIndex, 2));
+		Employee manager=new Employee((String) table.getValueAt(seletedIndex, 3));
+		int salary=(int) table.getValueAt(seletedIndex, 4);
+		Department dno=new Department((String) table.getValueAt(seletedIndex, 5));
+		return new Employee(empNo, empName, title, manager, salary, dno);
 	}
 
 }

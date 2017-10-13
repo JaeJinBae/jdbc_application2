@@ -9,6 +9,10 @@ public class Department {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Department(String deptName) {
+		this.deptName = deptName;
+	}
+
 	public Department(int deptNo) {
 		this.deptNo = deptNo;
 	}

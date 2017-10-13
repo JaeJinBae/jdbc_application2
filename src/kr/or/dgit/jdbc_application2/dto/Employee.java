@@ -12,6 +12,10 @@ public class Employee {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Employee(String empName) {
+		this.empName = empName;
+	}
+
 	public Employee(int empNo) {
 		this.empNo = empNo;
 	}
@@ -75,7 +79,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return String.format("%s(%s)", empName, empNo);
+		return String.format("%s %s %s %s %s %s", empName, empNo, title, manager, salary, dno);
 	}
 
 }

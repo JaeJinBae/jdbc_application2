@@ -8,6 +8,10 @@ public class Title {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Title(String titleName) {
+		this.titleName = titleName;
+	}
+
 	public Title(int titleNo) {
 		this.titleNo = titleNo;
 	}

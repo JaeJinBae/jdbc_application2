@@ -2,6 +2,8 @@ package kr.or.dgit.jdbc_application2.list;
 
 import javax.swing.SwingConstants;
 
+import kr.or.dgit.jdbc_application2.dto.Title;
+
 @SuppressWarnings("serial")
 public class ListTitle extends AbstractList {
 	
@@ -24,8 +26,10 @@ public class ListTitle extends AbstractList {
 
 	@Override
 	public Object getSelectedItem() {
-		// TODO Auto-generated method stub
-		return null;
+		int selectedIndex=table.getSelectedRow();
+		int titleNo=(int) table.getValueAt(selectedIndex, 0);
+		String titleName=(String) table.getValueAt(selectedIndex, 1);
+		return new Title(titleNo, titleName);
 	}
 
 }

@@ -11,6 +11,8 @@ import javax.swing.WindowConstants;
 
 import kr.or.dgit.jdbc_application2.list.AbstractList;
 import kr.or.dgit.jdbc_application2.list.ListDepartment;
+import kr.or.dgit.jdbc_application2.list.ListEmployee;
+import kr.or.dgit.jdbc_application2.list.ListTitle;
 
 public class TestListMain {
 
@@ -19,14 +21,14 @@ public class TestListMain {
 		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		jf.setBounds(10, 10, 300, 450);
 		
-		AbstractList ld = new ListDepartment();
-		jf.add(ld);
+		AbstractList lt = new ListEmployee();
+		jf.add(lt);
 		
 		JButton btn = new JButton("test");
 		btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Object obj = ld.getSelectedItem();
+				Object obj = lt.getSelectedItem();
 				JOptionPane.showMessageDialog(null, obj);
 			}
 		});

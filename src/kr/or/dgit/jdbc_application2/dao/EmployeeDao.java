@@ -19,7 +19,6 @@ public class EmployeeDao implements SqlDao<Employee> {
 	}
 
 	private EmployeeDao() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -100,5 +99,19 @@ public class EmployeeDao implements SqlDao<Employee> {
 		}
 		return lists;
 	}
+	
+	public List<Employee> selectItemByDno(Department dno) throws SQLException{
+		String sql = "select empno, empname, title, manager, salary, dno from employee where dno = ?";
+		List<Employee> lists=new ArrayList<>();
 
+		try (PreparedStatement pstmt = DBCon.getInstance().getConnection().prepareStatement(sql);) {
+			pstmt.setInt(1, dno.getDeptNo());
+			try (ResultSet rs = pstmt.executeQuery();) {
+				while (rs.next()) {
+					lists.add(getEmployee(rs));
+				}
+			}
+		}
+		return lists;
+	}
 }

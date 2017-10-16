@@ -115,4 +115,13 @@ public class EmployeeService {
 		}
 		return null;
 	}
+	
+	public List<Employee> selectManagerByDno(Department dno){
+		try {
+			return EmployeeDao.getInstance().selectItemByDno(dno);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

@@ -13,9 +13,11 @@ import kr.or.dgit.jdbc_application2.dto.Department;
 import kr.or.dgit.jdbc_application2.dto.Employee;
 import kr.or.dgit.jdbc_application2.dto.Title;
 import kr.or.dgit.jdbc_application2.service.EmployeeService;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class EmployeeContent extends JPanel {
+public class EmployeeContent extends JPanel implements ActionListener {
 
 	private TextFieldComponent pEmpNo;
 	private TextFieldComponent pEmpName;
@@ -37,6 +39,7 @@ public class EmployeeContent extends JPanel {
 		add(pEmpName);
 		
 		pDno = new ComboComponent<>("부서");
+		pDno.getCombo().addActionListener(this);
 		add(pDno);
 		
 		pManager = new ComboComponent<>("관리자");
@@ -55,7 +58,7 @@ public class EmployeeContent extends JPanel {
 	}
 
 	private void setManagerModel() {
-		List<Employee> lists = service.selectEmployeeByAll();
+		List<Employee> lists = service.selectManagerByDno(pDno.getSelectedItem());
 		Employee ceo = new Employee(4377);
 		if (!lists.contains(ceo)){
 			lists.add(service.selectEmployeeByNo(new Employee(4377)));
@@ -102,4 +105,10 @@ public class EmployeeContent extends JPanel {
 		pSalary.isEmptyCheck();
 		pTitle.isEmptyCheck();
 	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == pDno.getCombo()) {
+			setManagerModel();
+		}
+	}
+	
 }

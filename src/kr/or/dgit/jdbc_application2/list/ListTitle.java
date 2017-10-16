@@ -1,35 +1,47 @@
 package kr.or.dgit.jdbc_application2.list;
 
+import java.util.List;
+
 import javax.swing.SwingConstants;
 
 import kr.or.dgit.jdbc_application2.dto.Title;
+import kr.or.dgit.jdbc_application2.service.TitleService;
 
 @SuppressWarnings("serial")
 public class ListTitle extends AbstractList {
-	
+	private TitleService service;
+
+	public ListTitle(TitleService service) {
+		this.service = service;
+	}
+
 	@Override
 	protected void setAlignWidth() {
-		setAlign(SwingConstants.CENTER, 0,1);
+		setAlign(SwingConstants.CENTER, 0, 1);
 		setCellWidth(100, 150);
 	}
 
 	@Override
 	protected Object[][] getData() {
-		Object[][] data = {{1,"사장"},{2,"부장"}};
+		List<Title> lists = service.selectTitleByAll();
+
+		Object[][] data = new Object[lists.size()][];
+		for (int i = 0; i < lists.size(); i++) {
+			data[i] = lists.get(i).toArray();
+		}
 		return data;
 	}
 
 	@Override
 	protected String[] getColumnNames() {
-		return new String[] {"직책 번호", "직책 명"};
+		return new String[] { "직책 번호", "직책 명" };
 	}
 
 	@Override
 	public Object getSelectedItem() {
-		int selectedIndex=table.getSelectedRow();
-		int titleNo=(int) table.getValueAt(selectedIndex, 0);
-		String titleName=(String) table.getValueAt(selectedIndex, 1);
-		return new Title(titleNo, titleName);
+		int seletedIndex = table.getSelectedRow();
+		int titleNo = (int) table.getValueAt(seletedIndex, 0);
+		return service.selectTitleByNo(new Title(titleNo));
 	}
 
 }

@@ -1,11 +1,19 @@
 package kr.or.dgit.jdbc_application2.list;
 
+import java.util.List;
+
 import javax.swing.SwingConstants;
 
 import kr.or.dgit.jdbc_application2.dto.Department;
+import kr.or.dgit.jdbc_application2.service.DepartmentService;
 
 @SuppressWarnings("serial")
 public class ListDepartment extends AbstractList {
+	private DepartmentService service;
+	
+	public ListDepartment(DepartmentService service) {
+		this.service = service;
+	}
 
 	@Override
 	protected void setAlignWidth() {
@@ -15,11 +23,11 @@ public class ListDepartment extends AbstractList {
 
 	@Override
 	protected Object[][] getData() {
-		Object[][] datas = {
-				{1, "개발", 10},
-				{2, "인사", 20}, 
-				{3, "마케팅", 30}
-		};
+		List<Department> lists = service.selectDepartmentByAll();
+		Object[][] datas = new Object[lists.size()][];
+		for(int i=0; i<lists.size(); i++){
+			datas[i] = lists.get(i).toArray();
+		}
 		return datas;
 	}
 	
@@ -32,9 +40,7 @@ public class ListDepartment extends AbstractList {
 	public Object getSelectedItem() {
 		int seletedIndex = table.getSelectedRow();
 		int deptNo = (int) table.getValueAt(seletedIndex, 0);
-		String deptName = (String) table.getValueAt(seletedIndex, 1);
-		int floor = (int) table.getValueAt(seletedIndex, 2);
-		return new Department(deptNo, deptName, floor);
+		return service.selectDepartmentByNo(new Department(deptNo));
 	}
 
 }

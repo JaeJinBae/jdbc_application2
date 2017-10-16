@@ -8,7 +8,9 @@ import kr.or.dgit.jdbc_application2.view.ViewEmployee;
 import kr.or.dgit.jdbc_application2.view.ViewTitle;
 
 public class TestView {
-
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

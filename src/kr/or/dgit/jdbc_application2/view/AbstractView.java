@@ -11,11 +11,11 @@ import kr.or.dgit.jdbc_application2.list.AbstractList;
 
 @SuppressWarnings("serial")
 public abstract class AbstractView extends JFrame {
-
 	private JPanel contentPane;
 
 	public AbstractView(String title) {
 		setTitle(title);
+		createService();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -42,6 +42,8 @@ public abstract class AbstractView extends JFrame {
 		AbstractList pList = createList();
 		contentPane.add(pList, BorderLayout.CENTER);
 	}
+
+	protected abstract void createService();
 
 	protected abstract AbstractList createList();
 

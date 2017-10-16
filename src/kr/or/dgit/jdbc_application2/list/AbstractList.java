@@ -23,10 +23,9 @@ public abstract class AbstractList extends JPanel {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		loadData();
 	}
 
-	private void loadData() {
+	public void loadData() {
 		DefaultTableModel model = new DefaultTableModel(getData(), getColumnNames());
 		table.setModel(model);
 		setAlignWidth();

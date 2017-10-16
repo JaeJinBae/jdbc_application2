@@ -9,10 +9,6 @@ public class Department {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Department(String deptName) {
-		this.deptName = deptName;
-	}
-
 	public Department(int deptNo) {
 		this.deptNo = deptNo;
 	}
@@ -75,4 +71,7 @@ public class Department {
 		return String.format("%s(%s층)", deptName, floor);
 	}
 
+	public Object[] toArray(){
+		return new Object[]{deptNo, deptName, floor};
+	}
 }

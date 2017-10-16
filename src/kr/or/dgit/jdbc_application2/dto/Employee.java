@@ -12,10 +12,6 @@ public class Employee {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Employee(String empName) {
-		this.empName = empName;
-	}
-
 	public Employee(int empNo) {
 		this.empNo = empNo;
 	}
@@ -78,8 +74,34 @@ public class Employee {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + empNo;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (empNo != other.empNo)
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
-		return String.format("%s %s %s %s %s %s", empName, empNo, title, manager, salary, dno);
+		return String.format("%s(%s)", empName, empNo);
+	}
+
+	public Object[] toArray() {
+		return new Object[]{empNo, empName, title, manager, salary, dno};
 	}
 
 }

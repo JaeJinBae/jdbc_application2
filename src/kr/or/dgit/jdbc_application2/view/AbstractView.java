@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
 import kr.or.dgit.jdbc_application2.content.AbstractContent;
@@ -24,7 +26,7 @@ public abstract class AbstractView extends JFrame implements ActionListener {
 	public AbstractView(String title) {
 		setTitle(title);
 		createService();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,7 +52,26 @@ public abstract class AbstractView extends JFrame implements ActionListener {
 		pBtn.add(btnCancel);
 
 		pList = createList();
+		pList.setPopupMenu(createPopupMenu());
 		contentPane.add(pList, BorderLayout.CENTER);
+	}
+
+	private JPopupMenu createPopupMenu() {
+		JPopupMenu popUpMenu = new JPopupMenu();
+
+		JMenuItem delItem = new JMenuItem("삭제");
+		JMenuItem updateItem = new JMenuItem("수정");
+		JMenuItem searchItem = new JMenuItem("검색");
+
+		delItem.addActionListener(this);
+		updateItem.addActionListener(this);
+		searchItem.addActionListener(this);
+
+		popUpMenu.add(delItem);
+		popUpMenu.add(updateItem);
+		popUpMenu.add(searchItem);
+
+		return popUpMenu;
 	}
 
 	protected abstract void createService();
@@ -61,25 +82,54 @@ public abstract class AbstractView extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnOk) {
-			btnOkActionPerformed(e);
+			if(e.getActionCommand().equals("추가")){
+				btnOkActionPerformed(e);				
+			}
 		}
 		if (e.getSource() == btnCancel) {
 			btnCancelActionPerformed(e);
 		}
+		if (e.getActionCommand().equals("삭제")) {
+			//1. 리스트에서 선택된 Item을 가져와서
+			Object item=pList.getSelectedItem();
+			//2. service에서 delete호출
+			deleteContent(item);
+			//3. 삭제되고 난 후 목록을 다시 load
+			pList.loadData();
+		}
+		if (e.getActionCommand().equals("수정")) {
+			//1. 리스트에서 선택된 content를 가져와서
+			//2. 가져온 content를 pContent에 setContent();
+			//3. 버튼의 글자를 "추가"->"수정"으로 바꿔야함
+		}
+		if (e.getActionCommand().equals("검색")) {
+			//1. 다이얼로그 상자를 띄워서 사원번호, 부서번호, 직책번호를 가져와서
+			//2. 해당하는 번호로 service에서 검색한 content를 가져옴
+			//3. 검색된 content를 pContent.setContent() 호출
+			//4. pContent setEnable(flase)호출
+			//5. btn->"확인"으로 바꿔줌
+		}
+		if(e.getActionCommand().equals("확인")){
+			//1. pContent의 내용을 clear()함
+			//2. pContent의 내용을 setEnable(true);
+			//3. btn "확인"->"추가"로 바꿔줌
+		}
 	}
+
+	
 
 	protected void btnCancelActionPerformed(ActionEvent e) {
 		pContent.clear();
 	}
 
 	protected void btnOkActionPerformed(ActionEvent e) {
-		//0. 공백체크
+		// 0. 공백체크
 		try {
 			pContent.isEmptyCheck();
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
-		//1. pContent에서 입력된 내용(DTO)을 가져옴
+		// 1. pContent에서 입력된 내용(DTO)을 가져옴
 		Object content = pContent.getContent();
 		// 2. 입력된 DTO를 service를 이용해서 DB에 insert
 		insertContent(content);
@@ -88,4 +138,6 @@ public abstract class AbstractView extends JFrame implements ActionListener {
 	}
 
 	protected abstract void insertContent(Object content);
+	
+	protected abstract void deleteContent(Object item);
 }

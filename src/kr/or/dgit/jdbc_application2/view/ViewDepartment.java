@@ -44,6 +44,12 @@ public class ViewDepartment extends AbstractView {
 		
 	}
 
+	@Override
+	protected void deleteContent(Object item) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

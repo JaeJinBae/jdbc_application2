@@ -40,4 +40,10 @@ public class ViewTitle extends AbstractView {
 		
 	}
 
+	@Override
+	protected void deleteContent(Object content) {
+		service.deleteTitle((Title) content);
+		
+	}
+
 }

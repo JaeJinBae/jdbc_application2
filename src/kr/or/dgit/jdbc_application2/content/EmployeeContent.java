@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class EmployeeContent extends JPanel implements ActionListener {
+public class EmployeeContent extends AbstractContent<Employee> implements ActionListener {
 
 	private TextFieldComponent pEmpNo;
 	private TextFieldComponent pEmpName;
@@ -78,6 +78,7 @@ public class EmployeeContent extends JPanel implements ActionListener {
 		Vector<Department> depts = new Vector<>(lists);
 		pDno.setComboBoxModel(depts);
 	}
+	@Override
 	public Employee getContent(){
 		int empNo = Integer.parseInt(pEmpNo.getTextValue());
 		String empName = pEmpName.getTextValue();
@@ -87,7 +88,7 @@ public class EmployeeContent extends JPanel implements ActionListener {
 		Department dno = pDno.getSelectedItem();
 		return new Employee(empNo, empName, title, manager, salary, dno);
 	}
-	
+	@Override
 	public void setContent(Employee employee){
 		pEmpNo.setTextValue(employee.getEmpNo()+"");
 		pEmpName.setTextValue(employee.getEmpName());
@@ -96,7 +97,7 @@ public class EmployeeContent extends JPanel implements ActionListener {
 		pSalary.setSpinValue(employee.getSalary());
 		pTitle.setSelectedItem(employee.getTitle());
 	}
-	
+	@Override
 	public void isEmptyCheck() throws Exception {
 		pEmpNo.isEmptyCheck();
 		pEmpName.isEmptyCheck();
@@ -109,6 +110,17 @@ public class EmployeeContent extends JPanel implements ActionListener {
 		if (e.getSource() == pDno.getCombo()) {
 			setManagerModel();
 		}
+	}
+
+	@Override
+	public void clear() {
+		pEmpNo.setTextValue("");
+		pEmpName.setTextValue("");
+		pDno.setSelectedIndex(0);
+		pManager.setSelectedIndex(0);
+		pSalary.setSpinValue(1500000);
+		pTitle.setSelectedIndex(0);
+		
 	}
 	
 }

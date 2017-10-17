@@ -1,8 +1,8 @@
 package kr.or.dgit.jdbc_application2.view;
 
-import javax.swing.JPanel;
-
+import kr.or.dgit.jdbc_application2.content.AbstractContent;
 import kr.or.dgit.jdbc_application2.content.EmployeeContent;
+import kr.or.dgit.jdbc_application2.dto.Employee;
 import kr.or.dgit.jdbc_application2.list.AbstractList;
 import kr.or.dgit.jdbc_application2.list.ListEmployee;
 import kr.or.dgit.jdbc_application2.service.EmployeeService;
@@ -23,7 +23,7 @@ public class ViewEmployee extends AbstractView {
 	}
 
 	@Override
-	protected JPanel createContent() {
+	protected AbstractContent<Employee> createContent() {
 		EmployeeContent pContent = new EmployeeContent(es);
 		return pContent;
 	}

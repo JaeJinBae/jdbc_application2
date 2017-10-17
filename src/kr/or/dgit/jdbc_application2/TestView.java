@@ -22,7 +22,6 @@ public class TestView {
 					AbstractView frame3 = new ViewEmployee("사원관리");
 					frame3.setVisible(true);
 					
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -1,6 +1,8 @@
 package kr.or.dgit.jdbc_application2.view;
 
-import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+
+import com.sun.scenario.effect.AbstractShadow.ShadowMode;
 
 import kr.or.dgit.jdbc_application2.content.AbstractContent;
 import kr.or.dgit.jdbc_application2.content.DepartmentContent;
@@ -33,6 +35,13 @@ public class ViewDepartment extends AbstractView {
 	@Override
 	protected void createService() {
 		service = new DepartmentService();		
+	}
+
+	@Override
+	protected void insertContent(Object content) {
+		service.insertDepartment((Department) content);
+		pContent.clear();
+		
 	}
 
 

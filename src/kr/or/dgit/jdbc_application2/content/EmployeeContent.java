@@ -83,7 +83,7 @@ public class EmployeeContent extends AbstractContent<Employee> implements Action
 		int empNo = Integer.parseInt(pEmpNo.getTextValue());
 		String empName = pEmpName.getTextValue();
 		Title title = pTitle.getSelectedItem();
-		Employee manager = new Employee(empNo);
+		Employee manager = pManager.getSelectedItem();
 		int salary = pSalary.getSpinValue();
 		Department dno = pDno.getSelectedItem();
 		return new Employee(empNo, empName, title, manager, salary, dno);

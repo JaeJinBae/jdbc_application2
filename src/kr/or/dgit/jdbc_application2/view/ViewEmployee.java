@@ -33,4 +33,11 @@ public class ViewEmployee extends AbstractView {
 		es = new EmployeeService();
 	}
 
+	@Override
+	protected void insertContent(Object content) {
+		es.insertEmployee((Employee) content);
+		pContent.clear();
+		
+	}
+
 }

@@ -13,15 +13,17 @@ import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
 import kr.or.dgit.jdbc_application2.content.AbstractContent;
+import kr.or.dgit.jdbc_application2.dto.Title;
 import kr.or.dgit.jdbc_application2.list.AbstractList;
 
 @SuppressWarnings("serial")
 public abstract class AbstractView extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JButton btnCancel;
-	protected AbstractContent<?> pContent;
+	protected AbstractContent pContent;
 	protected AbstractList pList;
 	private JButton btnOk;
+	private Object item;
 
 	public AbstractView(String title) {
 		setTitle(title);
@@ -82,9 +84,7 @@ public abstract class AbstractView extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnOk) {
-			if(e.getActionCommand().equals("추가")){
-				btnOkActionPerformed(e);				
-			}
+			btnOkActionPerformed(e);				
 		}
 		if (e.getSource() == btnCancel) {
 			btnCancelActionPerformed(e);
@@ -99,22 +99,23 @@ public abstract class AbstractView extends JFrame implements ActionListener {
 		}
 		if (e.getActionCommand().equals("수정")) {
 			//1. 리스트에서 선택된 content를 가져와서
+			item=pList.getSelectedItem();
 			//2. 가져온 content를 pContent에 setContent();
+			pContent.setContent(item);
 			//3. 버튼의 글자를 "추가"->"수정"으로 바꿔야함
+			btnOk.setText("수정");
+			
 		}
 		if (e.getActionCommand().equals("검색")) {
 			//1. 다이얼로그 상자를 띄워서 사원번호, 부서번호, 직책번호를 가져와서
-			//2. 해당하는 번호로 service에서 검색한 content를 가져옴
-			//3. 검색된 content를 pContent.setContent() 호출
-			//4. pContent setEnable(flase)호출
-			//5. btn->"확인"으로 바꿔줌
-		}
-		if(e.getActionCommand().equals("확인")){
-			//1. pContent의 내용을 clear()함
-			//2. pContent의 내용을 setEnable(true);
-			//3. btn "확인"->"추가"로 바꿔줌
+			int num=Integer.parseInt(JOptionPane.showInputDialog("검색할 번호를 입력하세요."));
+			item=searchContent(num);
+			pContent.setContent(item);
+			pContent.setEnable(false);
+			btnOk.setText("확인");
 		}
 	}
+
 
 	
 
@@ -129,15 +130,31 @@ public abstract class AbstractView extends JFrame implements ActionListener {
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
-		// 1. pContent에서 입력된 내용(DTO)을 가져옴
-		Object content = pContent.getContent();
-		// 2. 입력된 DTO를 service를 이용해서 DB에 insert
-		insertContent(content);
-		// 3. pList에서 목록을 새로 load
-		pList.loadData();
+		if(btnOk.getText().equals("추가")){
+			// 1. pContent에서 입력된 내용(DTO)을 가져옴
+			Object content = pContent.getContent();
+			// 2. 입력된 DTO를 service를 이용해서 DB에 insert
+			insertContent(content);
+			// 3. pList에서 목록을 새로 load
+			pList.loadData();
+		}
+
+		if(btnOk.getText().equals("수정")){
+			Object content=pContent.getContent();
+			updateContent(content);
+			pList.loadData();
+		}
+		if(btnOk.getText().equals("확인")){
+			pContent.setEnable(true);
+			pContent.clear();
+		}
 	}
 
 	protected abstract void insertContent(Object content);
 	
 	protected abstract void deleteContent(Object item);
+	
+	protected abstract void updateContent(Object item);
+	
+	protected abstract Object searchContent(int num);
 }

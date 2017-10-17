@@ -41,9 +41,20 @@ public class ViewEmployee extends AbstractView {
 	}
 
 	@Override
-	protected void deleteContent(Object item) {
-		// TODO Auto-generated method stub
+	protected void deleteContent(Object content) {
+		es.deleteEmployee((Employee) content);
+	}
+
+	@Override
+	protected void updateContent(Object item) {
+		es.updateEmployee((Employee) item);
+		pContent.clear();
 		
+	}
+
+	@Override
+	protected Object searchContent(int num) {
+		return es.selectEmployeeByNo(new Employee(num));
 	}
 
 }

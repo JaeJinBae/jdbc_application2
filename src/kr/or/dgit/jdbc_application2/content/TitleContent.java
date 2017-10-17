@@ -45,4 +45,11 @@ public class TitleContent extends AbstractContent<Title> {
 		pTitleNo.setTextValue("");
 		pTitleName.setTextValue("");
 	}
+
+	@Override
+	public void setEnable(boolean item) {
+		pTitleName.getTextField().setEnabled(item);
+		pTitleNo.getTextField().setEnabled(item);
+	}
+
 }

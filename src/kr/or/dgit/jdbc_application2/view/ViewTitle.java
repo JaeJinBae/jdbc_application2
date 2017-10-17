@@ -46,4 +46,15 @@ public class ViewTitle extends AbstractView {
 		
 	}
 
+	@Override
+	protected void updateContent(Object item) {
+		service.updateTitle((Title) item);
+		pContent.clear();
+	}
+
+	@Override
+	protected Object searchContent(int num) {
+		return service.selectTitleByNo(new Title(num));
+	}
+
 }

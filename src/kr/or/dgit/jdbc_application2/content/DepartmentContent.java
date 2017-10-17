@@ -53,6 +53,12 @@ public class DepartmentContent extends AbstractContent<Department> {
 		pFloor.setTextValue("");
 		
 	}
+	@Override
+	public void setEnable(boolean item) {
+		pDeptNo.getTextField().setEnabled(item);
+		pDeptName.getTextField().setEnabled(item);
+		pFloor.getTextField().setEnabled(item);
+	}
 }
 
 

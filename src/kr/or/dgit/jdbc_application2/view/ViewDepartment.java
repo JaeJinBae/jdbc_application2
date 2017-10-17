@@ -45,11 +45,21 @@ public class ViewDepartment extends AbstractView {
 	}
 
 	@Override
-	protected void deleteContent(Object item) {
-		// TODO Auto-generated method stub
+	protected void deleteContent(Object content) {
+		service.deleteDepartment((Department) content);
 		
 	}
 
+	@Override
+	protected void updateContent(Object item) {
+		service.updateDepartment((Department) item);
+		pContent.clear();
+	}
+
+	@Override
+	protected Object searchContent(int num) {
+		return service.selectDepartmentByNo(new Department(num));
+	}
 
 
 }

@@ -31,6 +31,7 @@ public abstract class AbstractList extends JPanel {
 	}
 	
 	public void loadData() {
+		table.clearSelection();
 		DefaultTableModel model = new DefaultTableModel(getData(), getColumnNames());
 		table.setModel(model);
 		setAlignWidth();

@@ -122,5 +122,15 @@ public class EmployeeContent extends AbstractContent<Employee> implements Action
 		pTitle.setSelectedIndex(0);
 		
 	}
+
+	@Override
+	public void setEnable(boolean item) {
+		pEmpNo.getTextField().setEnabled(item);
+		pEmpName.getTextField().setEnabled(item);
+		pDno.getCombo().setEnabled(item);
+		pManager.getCombo().setEnabled(item);
+		pSalary.getComponent().setEnabled(item);
+		pTitle.getCombo().setEnabled(item);
+	}
 	
 }

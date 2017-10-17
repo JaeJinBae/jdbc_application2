@@ -1,7 +1,5 @@
 package kr.or.dgit.jdbc_application2.view;
 
-import java.awt.event.ActionEvent;
-
 import kr.or.dgit.jdbc_application2.content.AbstractContent;
 import kr.or.dgit.jdbc_application2.content.TitleContent;
 import kr.or.dgit.jdbc_application2.dto.Title;
@@ -12,7 +10,6 @@ import kr.or.dgit.jdbc_application2.service.TitleService;
 @SuppressWarnings("serial")
 public class ViewTitle extends AbstractView {
 	private TitleService service;
-	TitleContent pContent;
 	
 	public ViewTitle(String title) {
 		super(title);		
@@ -20,7 +17,7 @@ public class ViewTitle extends AbstractView {
 
 	@Override
 	protected AbstractList createList() {
-		ListTitle pList = new ListTitle(service);
+		pList = new ListTitle(service);
 		pList.loadData();
 		return pList;
 	}
@@ -28,7 +25,7 @@ public class ViewTitle extends AbstractView {
 	@Override
 	protected AbstractContent<Title> createContent() {
 		pContent = new TitleContent();
-		return pContent;
+		return (AbstractContent<Title>) pContent;
 	}
 
 	@Override

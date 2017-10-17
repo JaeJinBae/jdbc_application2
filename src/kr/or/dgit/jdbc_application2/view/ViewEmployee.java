@@ -17,15 +17,15 @@ public class ViewEmployee extends AbstractView {
 
 	@Override
 	protected AbstractList createList() {
-		ListEmployee pList = new ListEmployee(es);
+		pList = new ListEmployee(es);
 		pList.loadData();
 		return pList;
 	}
 
 	@Override
 	protected AbstractContent<Employee> createContent() {
-		EmployeeContent pContent = new EmployeeContent(es);
-		return pContent;
+		pContent = new EmployeeContent(es);
+		return (AbstractContent<Employee>) pContent;
 	}
 
 	@Override

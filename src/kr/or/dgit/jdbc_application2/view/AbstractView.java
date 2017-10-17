@@ -1,6 +1,8 @@
 package kr.or.dgit.jdbc_application2.view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,14 +11,13 @@ import javax.swing.border.EmptyBorder;
 
 import kr.or.dgit.jdbc_application2.content.AbstractContent;
 import kr.or.dgit.jdbc_application2.list.AbstractList;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public abstract class AbstractView extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JButton btnCancel;
-	AbstractContent<?> pContent;
+	protected AbstractContent<?> pContent;
+	protected AbstractList pList;
 
 	public AbstractView(String title) {
 		setTitle(title);
@@ -45,7 +46,7 @@ public abstract class AbstractView extends JFrame implements ActionListener {
 		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
 		
-		AbstractList pList = createList();
+		pList = createList();
 		contentPane.add(pList, BorderLayout.CENTER);
 	}
 
